@@ -15,7 +15,7 @@ def arquivo_mensal():
     return str(local_arquivo)
 
 
-def cadastrar_dados(produto, valor):
+def cadastrar_dados(produto, valor, parcelas):
     """
     Escreve no arquivo dados.txt alguma coisa.
     """
@@ -23,13 +23,17 @@ def cadastrar_dados(produto, valor):
     produto = produto.strip()
     produto = produto.replace(' ', '_')
     valor = valor.strip()
-
+    parcelas = parcelas.strip()
+    
     if len(produto) and len(valor) == 0:
         messagebox.showinfo(message='Ainda existem campos em branco, por favor preencha-os!')
     
+    elif len(parcelas) == 0 or int(parcelas) == 0:
+        parcelas = 1
+
     elif len(produto) and len(valor) > 0 and valor.isnumeric() == True:
         with open(f'{arquivo_mensal()}', 'a', encoding='Utf-8') as dados:
-            dados.write(f'{data_info} {produto} {valor}\n')
+            dados.write(f'{data_info} {produto} {valor} {parcelas}\n')
 
 
 def limpar_dados():
@@ -57,11 +61,13 @@ def filtrar_dados(tipo: str):
     lista_datas = []
     lista_produtos = []
     lista_preços = []
+    lista_parcelas = []
     while cont_geral < len(valores)-1:
-        lista_datas.append(str(valores[cont_geral]))
-        lista_produtos.append(str(valores[(cont_geral)+1]))
-        lista_preços.append(float(valores[(cont_geral)+2]))
-        cont_geral += 3
+        lista_datas.append    (str(valores[cont_geral]))
+        lista_produtos.append (str(valores[(cont_geral)+1]))
+        lista_preços.append   (float(valores[(cont_geral)+2]))
+        lista_parcelas.append (int(valores[(cont_geral)+3]))
+        cont_geral += 4
     if tipo == 'data':
         return lista_datas 
     elif tipo == 'produtos':
@@ -126,4 +132,4 @@ def lança_fatura(vezes):
     essa função lançará nos arquivos dos proxímos 12 meses o valor da parcela.
     """
     vezes = vezes.get()
-    print(f'Número de faturas = {vezes}')
+    
