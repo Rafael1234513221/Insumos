@@ -20,18 +20,21 @@ def cadastrar_dados(produto, valor, parcelas):
     Escreve no arquivo dados.txt alguma coisa.
     """
     data_info = strftime('%D')
+    data_info = data_info.split('/')
+    data_info = f'{data_info[1]}/{data_info[0]}/{data_info[2]}'
+
     produto = produto.strip()
     produto = produto.replace(' ', '_')
     valor = valor.strip()
     parcelas = parcelas.strip()
     
+    if len(parcelas) == 0:
+        parcelas = '1'
+    if parcelas == '0':
+        parcelas = '1'
     if len(produto) and len(valor) == 0:
         messagebox.showinfo(message='Ainda existem campos em branco, por favor preencha-os!')
-    
-    elif len(parcelas) == 0 or int(parcelas) == 0:
-        parcelas = 1
-
-    elif len(produto) and len(valor) > 0 and valor.isnumeric() == True:
+    elif len(produto) and len(valor) > 0 and valor.isnumeric() == True and parcelas.isnumeric() == True:
         with open(f'{arquivo_mensal()}', 'a', encoding='Utf-8') as dados:
             dados.write(f'{data_info} {produto} {valor} {parcelas}\n')
 
@@ -50,7 +53,7 @@ def filtrar_dados(tipo: str):
     """
     linhas = []
     valores = ''
-    with open(f'{arquivo_mensal()}', 'r') as arquivo:
+    with open(f'{arquivo_mensal()}', 'r', encoding='Utf-8') as arquivo:
         for linha in arquivo:
             linhas.append(linha.strip().split('\n'))
     for conteúdo in linhas:
@@ -63,10 +66,10 @@ def filtrar_dados(tipo: str):
     lista_preços = []
     lista_parcelas = []
     while cont_geral < len(valores)-1:
-        lista_datas.append    (str(valores[cont_geral]))
-        lista_produtos.append (str(valores[(cont_geral)+1]))
-        lista_preços.append   (float(valores[(cont_geral)+2]))
-        lista_parcelas.append (int(valores[(cont_geral)+3]))
+        lista_datas.append(str(valores[cont_geral]))
+        lista_produtos.append(str(valores[(cont_geral)+1]))
+        lista_preços.append(float(valores[(cont_geral)+2]))
+        lista_parcelas.append(int(valores[(cont_geral)+3]))
         cont_geral += 4
     if tipo == 'data':
         return lista_datas 
@@ -75,7 +78,7 @@ def filtrar_dados(tipo: str):
     elif tipo == 'preços':
         return lista_preços
     elif tipo == 'todos':
-        return [lista_datas, lista_produtos, lista_preços]
+        return [lista_datas, lista_produtos, lista_preços, lista_parcelas]
 
 
 def atualiza_salário():
@@ -95,14 +98,15 @@ def compras_mensais():
     Localiza o arquivo que diz respeito ao mês de consulta e retorna em uma forma amigável.
     """
     extrato_mensal = filtrar_dados('todos')
-    dados_de_saida = f'{"":-^55}\n'
-    dados_de_saida += f'|{"DATA":^10} {"PRODUTO":^30} {"VALOR":^10} |\n'
+    dados_de_saida = f'{"":-^60}\n'
+    dados_de_saida += f'|{"DATA":^10} {"PRODUTO":^30} {"VALOR":^10} {"PARCELAS":^10}|\n'
     for cont in range(len(extrato_mensal[0])):
         dados_de_saida += f'|{extrato_mensal[0][cont]:<10} '  # Pega as datas
         dados_de_saida += f'{extrato_mensal[1][cont]:<40} '   # Pega o nome dos produtos
-        dados_de_saida += f'{extrato_mensal[2][cont]:<10} |'  # Pega o valores dos produtos
+        dados_de_saida += f'{extrato_mensal[2][cont]:<10} '   # Pega o valores dos produtos
+        dados_de_saida += f'{extrato_mensal[3][cont]:<10}|'   # Pega as parcelas dos produtos
         dados_de_saida += '\n'
-    dados_de_saida += f'{"":-^55}\n'
+    dados_de_saida += f'{"":-^60}\n'
     dados_de_saida = dados_de_saida.replace('_', ' ')
     return dados_de_saida
 
@@ -125,11 +129,21 @@ def cria_arquivos():
             arquivo.write('')
 
 
-def lança_fatura(vezes):
+def lança_fatura():
     """ 
     Cadastra nos proximos meses os valores de uma fatura de acordo com o número
     de parcela que esta tem. Por exemplo se tiver um celular parcelado em 12x
     essa função lançará nos arquivos dos proxímos 12 meses o valor da parcela.
     """
-    vezes = vezes.get()
-    
+    lista = filtrar_dados('todos')
+    cont = 0
+    arquivo = ''
+    for item in lista:
+        arquivo += f'{str(item[cont])}'
+        arquivo += f'{str(item[(cont)+1])}'
+        arquivo += f'{str(item[(cont)+2])}'
+        arquivo += f'{str(item[(cont)+3])}'
+
+
+
+# lança_fatura()

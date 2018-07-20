@@ -1,0 +1,39 @@
+### 
+COLOQUE AQUI SUAS SUGESTÕES, BUGS OU IDEIAS, IREI RESOLVER UMA POR UMA QUE ESTÁ NESSA LISTA
+###
+
+[ok]
+    Alterar o formato da data que é cadastrado no arquivo para o modelo
+    brasileiro dd/mm/aaaa.
+
+[ok]
+    Resolver a encodificação do arquivo, pois na hora de mostrar o extrato
+    está vindo bugado, me parece ser na função de filtrar dados.
+
+[]
+    Fazer com que os valores passado na entrada de parcelas seja o número de vezes
+    que será repetido tal valor nos arquivos dos meses respectivos
+    Por exemplo:
+    se coloquei que o produto foi dividido em 5 parcelas, logo o programa deverá 
+    lançar esse data/nome/valor nos proxímos 4 meses.
+
+[]
+    Resolver a parte dos arquivos, onde pretendo deixar os BancoDeDados.txt separados
+    por anos e com nomes padrões, até porque num futuro não muito distante pretento
+    fazer uma analise completa do que foi comprado.
+
+[]
+    Separar o que foi comprado baseado na sua classe
+    Por exemplo: 
+    Se eu comprei uma camisa, no gráfico de médias de compras, ela deverá está explicita
+    na classe de vestiarios e assim pras respectivas outras coisas.
+
+[]
+    Quando aprender como usar o banco de dados MySql, irei migrar os arquivos txt pra um
+    BancoDeDados criptografado para uma maior segurança.
+
+[]
+    Migrar a interface gráfica para algo mais bem feito.
+
+[]
+    Refazer toda a lógica visando melhoramento de desempenho.

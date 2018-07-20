@@ -108,14 +108,14 @@ class Aplicativo:
         Chama uma função externa que consulta as últimas compras (Mês em questão).
         """
         if self.ver_compras['text'] == 'Minimizar extrato':
-            window.geometry('274x226+104+104')
+            window.geometry('300x252+104+104')
             self.ver_compras['text'] == 'EXTRATO'
             self.entradas()
             self.botoes()
             self.mostrar_salário()
 
         elif self.ver_compras['text'] == 'EXTRATO':
-            window.geometry('274x500+104+104')
+            window.geometry('300x500+104+104')
             self.ver_compras['text'] = 'Minimizar extrato'
             self.ver_extrato = Label(self.frame3, text=f'EXTRATO\n{compras_mensais()}')
             self.ver_extrato.grid(row=8, column=1, columnspan=2)
@@ -123,5 +123,6 @@ class Aplicativo:
 
 window = Tk()
 window.title('INSUMOS')
+window.geometry('300x252+104+104')
 Aplicativo(window)
 window.mainloop()
