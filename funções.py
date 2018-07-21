@@ -147,3 +147,4 @@ def lança_fatura():
 
 
 # lança_fatura()
+# testando
