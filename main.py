@@ -1,5 +1,4 @@
 """
-"editor.fontFamily": "'Menlo', 'Consolas', 'DejaVu Sans Mono', 'monospace'",
 Interface gráfica do programa.
 """
 

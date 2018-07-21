@@ -144,7 +144,3 @@ def lança_fatura():
         arquivo += f'{str(item[(cont)+2])}'
         arquivo += f'{str(item[(cont)+3])}'
 
-
-
-# lança_fatura()
-# testando
