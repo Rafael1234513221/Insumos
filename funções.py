@@ -136,11 +136,6 @@ def lança_fatura():
     essa função lançará nos arquivos dos proxímos 12 meses o valor da parcela.
     """
     lista = filtrar_dados('todos')
-    cont = 0
-    arquivo = ''
-    for item in lista:
-        arquivo += f'{str(item[cont])}'
-        arquivo += f'{str(item[(cont)+1])}'
-        arquivo += f'{str(item[(cont)+2])}'
-        arquivo += f'{str(item[(cont)+3])}'
+    print(lista[0])
+lança_fatura()
 
